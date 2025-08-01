@@ -1,0 +1,342 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=1.5 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=1.5 cm, % seperation between body and page edge from the left
+    right=1.5 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+%====================================================
+% tow content max for right contenet
+%====================================================
+
+\newenvironment{twocolentryforright}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 7cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+%====================================================
+% 
+%====================================================
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{25 pt}{25 pt}\selectfont Smii Jeber
+
+        \vspace{5 pt}
+
+        \normalsize
+        
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{mailto:jebersmii@gmail.com}{jebersmii@gmail.com}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{tel:+21651796277}{51796277}}%
+        \kern 5.0 pt%
+        \AND%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/jeber-smii-512572333/}{linkedin.com/in/jeber-smii-512572333}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/jeber-smii}{github.com/jeber-smii}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{Sfax}%
+        
+        
+    \end{header}
+
+    \vspace{5 pt }
+
+
+    %====================================================
+    % Profile
+    %====================================================
+    \section{Profile}
+        \vspace{0.5em}
+        Diplômé en Licence de Technologies de l'Informatique, spécialité Développement des Systèmes d'Information.
+        Passionné par le développement d'applications web et mobiles, je maîtrise .NET, Java, React.js, Flutter ainsi
+        que les pratiques DevOps.
+
+
+    %====================================================
+    % Expériences professionnelles
+    %====================================================
+    \section{Expériences professionnelles}
+
+
+    %====================================================
+    % Stage pfe
+    %====================================================
+        \vspace{0.5em}
+        \begin{twocolentry}{
+                Fév 2025 – Mai 2025
+            }
+                \textbf{Stage de fin d'études }-- Internet Soft (MTD Group), Sfax
+        \end{twocolentry}
+        \vspace{-0.1cm}
+            \begin{itemize}[label=\textbullet,left=0.3cm]
+                \item Conception et réalisation d'une application Web/Mobile avec microservices et Docker pour le suivi des établissements, des événements et des promotions dans la ville de Sfax.
+                \vspace{-0.1cm}
+                \item \textbf{Mots clés :} .NET Core, React/Redux, Flutter/Riverpod,SQL Server, Docker, Microservices, JWT.
+            \end{itemize}
+
+
+    %====================================================
+    % Stage perfectionnement
+    %====================================================
+        \begin{twocolentry}{
+                Juil 2024
+            }
+                \textbf{Stage de perfectionnement }-- AIM Connection, Tunis
+        \end{twocolentry}
+        \vspace{-0.1cm}
+            \begin{itemize}[label=\textbullet,left=0.3cm]
+                \item Conception et développement d'une application Web pour la gestion et le suivi du matériel informatique (PC, écrans, périphériques) au sein de l’entreprise.
+                \vspace{-0.1cm}
+                \item \textbf{Mots clés :} .NET Core, SQL Server.
+            \end{itemize}
+
+
+    %====================================================
+    % Stage initiation
+    %====================================================
+        \begin{twocolentry}{
+                Jan 2023 -- Fév 2023
+            }
+                \textbf{Stage d'initiation }-- Advancia téléservices (SPG Group), Tunis
+        \end{twocolentry}
+        \vspace{-0.1cm}
+            \begin{itemize}[label=\textbullet,left=0.3cm]
+                \item Maintenance et configuration d’ordinateurs portables pour le télétravail, incluant l’installation du système d’exploitation et des outils nécessaires.
+                \vspace{-0.1cm}
+                \item Inventaire et saisie du matériel informatique de l’entreprise dans la plateforme GLPI.
+            \end{itemize}
+
+
+    %====================================================
+    % Formation
+    %====================================================
+    \section{Formation}
+
+
+    %====================================================
+    % Licence
+    %====================================================
+        \vspace{0.5em}
+        \begin{twocolentry}{
+                ISET Sfax -- 2022 -- 2025
+            }
+                \textbf{Licence en Technologies de l'Informatique (Développement des Systèmes d'Information)}
+        \end{twocolentry}
+
+
+    %====================================================
+    % BAC
+    %====================================================
+    \vspace{-0.5em}
+        \begin{twocolentryforright}{
+                Lycée Gremda (Sfax) 2020 -- 2021
+            }
+                \textbf{Baccalauréat, Section Sciences Techniques}
+        \end{twocolentryforright}
+
+
+    %====================================================
+    % Compétences techniques
+    %====================================================
+    \section{Compétences techniques}
+        \vspace{0.5em}
+        \begin{itemize}[label=\textbullet,left=0cm]
+            
+        
+
+    %====================================================
+    % Language
+    %====================================================
+            \item \textbf{Langages de programmation : }Java, Python, PHP, JavaScript/TypeScript, C\#, C.
+    %====================================================
+    % Backend
+    %====================================================
+            \item \textbf{Backend : }ASP.NET Core, REST API,Django REST Framework, Express.js, JEE.
+    %====================================================
+    % web front
+    %====================================================
+            \item \textbf{Frontend(Web) : }HTML, CSS, JavaScript, React.js, Next.js, Django, Bootstrap.
+    %====================================================
+    % Mobile
+    %====================================================
+            \item \textbf{Mobile : }Java, Flutter.    
+    %====================================================
+    % DataBase
+    %====================================================
+            \item \textbf{Bases de données : }SQL Server, MySQL, SQLite, Oracle, MongoDB, Firebase.   
+    %====================================================
+    % Modélisation
+    %====================================================
+            \item \textbf{Modélisation : }UML. 
+    %====================================================
+    % Méthodologies
+    %====================================================
+            \item \textbf{Méthodologies : }Agile Scrum. 
+        \end{itemize}
+
+
+    %====================================================
+    % Compétences comportementales
+    %====================================================
+    \section{Compétences comportementales}
+        \vspace{0.5em}
+        Communication · Travail d'équipe · Adaptabilité · Résolution de problèmes · Gestion du temps
+    %====================================================
+    % Langues
+    %====================================================
+    \section{Compétences comportementales}
+        \vspace{0.5em}
+        Arabe · Français · Anglais
+\end{document}
